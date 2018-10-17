@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import PropTypes from 'prop-types'
 
 class PropertyCard extends Component {
   state = {
@@ -16,7 +17,7 @@ class PropertyCard extends Component {
   }
 
   render() {
-    const { property, type } = this.props
+    const { property, type, buttonClick } = this.props
     const agency = property.agency;
     const backgroundColor = agency.brandingColors.primary;
     const logoImage = agency.logo;
@@ -25,19 +26,16 @@ class PropertyCard extends Component {
 
     let overlayButton;
     if (type === 'results') {
-      overlayButton = <SaveButton>Add Property +</SaveButton>
+      overlayButton = <SaveButton onClick={() => buttonClick(property.id)}>Add Property</SaveButton>
     } else if (type === 'saved') {
-      overlayButton = <RemoveButton>Remove Property -</RemoveButton>
+      overlayButton = <RemoveButton onClick={() => buttonClick(property.id)}>Remove Property</RemoveButton>
     } else {
       return null
     }
 
 
     return (
-      <CardWrapper
-        onMouseEnter={console.log('entered')}
-        onMouseLeave={console.log('left')}
-      >
+      <CardWrapper>
         <CardHeader background={backgroundColor}>
           <Logo src={logoImage} />
         </CardHeader>
@@ -53,9 +51,15 @@ class PropertyCard extends Component {
   }
 };
 
+PropertyCard.propTypes = {
+  property: PropTypes.object.isRequired,
+  type: PropTypes.string.isRequired,
+  buttonClick: PropTypes.func
+}
+
 export default PropertyCard;
 
-/*Styled Componenets */
+/********************** Styled Componenets ***********************/
 
 const CardWrapper = styled.div`
   display: grid;
@@ -89,7 +93,9 @@ const MainImage = styled.img`
   max-height: 100%;
 `;
 
-const Logo = styled.img``;
+const Logo = styled.img`
+  border-radius: 5px;
+`;
 
 const Price = styled.div`
   height: 100%;
@@ -126,7 +132,7 @@ const Overlay = styled.div`
 const Button = styled.button`
   padding: 10px 15px;
   font-size: 1.5rem;
-  border-radius: 10px;
+  border-radius: 5px;
   transition: all 0.1s linear;
   border: 0;
   &:focus {
