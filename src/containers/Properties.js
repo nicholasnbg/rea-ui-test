@@ -13,8 +13,8 @@ class Properties extends Component {
   render() {
     return (
       <PropertiesWrapper>
-        <PropertiesColumn properties={this.state.results} heading={"Results"} />
-        <PropertiesColumn properties={this.state.saved} heading={"Saved"} />
+        <PropertiesColumn properties={this.state.results} heading={"Results"} type={"results"} />
+        <PropertiesColumn properties={this.state.saved} heading={"Saved"} type={"saved"} />
       </PropertiesWrapper>
     );
   }
