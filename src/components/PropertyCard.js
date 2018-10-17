@@ -26,9 +26,9 @@ export default PropertyCard;
 
 const CardWrapper = styled.div`
   display: grid;
-  grid-template-rows: 40px 370px 90px;
+  grid-template-rows: 45px 370px 90px;
   max-height: 500px;
-  width: 100%;
+  max-width: 600px;
   justify-content: space-between;
   border-radius: 5px;
   box-shadow: 0 0.125em 0.25em rgba(0, 0, 0, 0.2);
@@ -39,7 +39,7 @@ const CardHeader = styled.div`
   display: flex;
   padding-left: 10px;
   align-items: center;
-  height: 40px;
+  height: 100%;
   border-radius: 5px 5px 0 0;
   background-color: ${props => props.background || "#f3f3f3"};
 `;
@@ -51,7 +51,7 @@ const ImageWrapper = styled.div`
 
 const MainImage = styled.img`
   width: 100%;
-  height: 100%;
+  max-height: 100%;
 `;
 
 const Logo = styled.img``;
