@@ -4,8 +4,10 @@ import PropTypes from "prop-types";
 
 class PropertyCard extends Component {
   state = {
-    hovered: false
+    hovered: false,
+    visible: true
   };
+
 
   onHover = () => {
     const { hovered } = this.state;
@@ -14,8 +16,17 @@ class PropertyCard extends Component {
     });
   };
 
+  onClick = (id, type) => {
+    if (type === "saved") {
+      this.setState({
+        visible: false
+      })
+    }
+    setTimeout(() => { this.props.buttonClick(id) }, 300)
+  }
+
   render() {
-    const { property, type, buttonClick } = this.props;
+    const { property, type } = this.props;
     const agency = property.agency;
     const backgroundColor = agency.brandingColors.primary;
     const logoImage = agency.logo;
@@ -25,13 +36,13 @@ class PropertyCard extends Component {
     let overlayButton;
     if (type === "results") {
       overlayButton = (
-        <SaveButton onClick={() => buttonClick(property.id)}>
+        <SaveButton onClick={() => this.onClick(property.id, type)}>
           Add Property
         </SaveButton>
       );
     } else if (type === "saved") {
       overlayButton = (
-        <RemoveButton onClick={() => buttonClick(property.id)}>
+        <RemoveButton onClick={() => this.onClick(property.id, type)}>
           Remove Property
         </RemoveButton>
       );
@@ -40,7 +51,7 @@ class PropertyCard extends Component {
     }
 
     return (
-      <CardWrapper>
+      <CardWrapper visible={this.state.visible} >
         <CardHeader background={backgroundColor}>
           <Logo src={logoImage} />
         </CardHeader>
@@ -73,6 +84,8 @@ const CardWrapper = styled.div`
   border-radius: 5px;
   box-shadow: 0 0.125em 0.25em rgba(0, 0, 0, 0.2);
   margin: 20px 0;
+  transition: all 0.3s ease-in;
+  opacity: ${props => props.visible ? 1 : 0}
 `;
 
 const CardHeader = styled.div`
