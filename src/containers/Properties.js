@@ -10,11 +10,35 @@ class Properties extends Component {
     saved: resultsData.saved
   };
 
+  saveProperty = (id) => {
+    const { results, saved } = this.state
+    const resultIndex = results.map(result => result.id).indexOf(id)
+    const property = results[resultIndex]
+
+    const isDuplicate = saved.map(result => result.id).indexOf(id) !== -1
+    const newSaved = isDuplicate ? saved : [...saved, property]
+
+    this.setState({
+      results: results,
+      saved: newSaved
+    })
+  }
+
+  unsaveProperty = (id) => {
+    const { saved } = this.state
+    const removeIndex = saved.map(result => result.id).indexOf(id)
+    saved.splice(removeIndex, 1)
+
+    this.setState({
+      saved: saved
+    })
+  }
+
   render() {
     return (
       <PropertiesWrapper>
-        <PropertiesColumn properties={this.state.results} heading={"Results"} type={"results"} />
-        <PropertiesColumn properties={this.state.saved} heading={"Saved"} type={"saved"} />
+        <PropertiesColumn properties={this.state.results} heading={"Results"} type={"results"} buttonClick={this.saveProperty} />
+        <PropertiesColumn properties={this.state.saved} heading={"Saved"} type={"saved"} buttonClick={this.unsaveProperty} />
       </PropertiesWrapper>
     );
   }
@@ -27,4 +51,5 @@ const PropertiesWrapper = styled.div`
   grid-template-columns: 1fr 1fr;
   grid-gap: 40px;
   padding: 0 15%;
+  background: #f0f2f5;
 `;
