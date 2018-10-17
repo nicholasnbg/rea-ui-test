@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import resultsData from "../data/property-data";
 import styled from "styled-components";
-import Saved from "../components/Saved";
-import Results from "../components/Results";
+import PropertiesColumn from "../components/PropertiesColumn";
+
 
 class Properties extends Component {
   state = {
@@ -13,8 +13,8 @@ class Properties extends Component {
   render() {
     return (
       <PropertiesWrapper>
-        <Results properties={this.state.results} />
-        <Saved properties={this.state.saved} />
+        <PropertiesColumn properties={this.state.results} heading={"Results"} />
+        <PropertiesColumn properties={this.state.saved} heading={"Saved"} />
       </PropertiesWrapper>
     );
   }
