@@ -1,28 +1,32 @@
-import React from "react";
+import React, { Fragment } from "react";
 import styled from "styled-components";
 import PropertyCard from "../components/PropertyCard";
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types";
 
 const PropertiesColumn = ({ properties, heading, type, buttonClick }) => {
   let emptyMessageText;
   if (type === "results") {
-    emptyMessageText = "Sorry, no results found..."
+    emptyMessageText = "Sorry, no results found...";
   } else if (type === "saved") {
-    emptyMessageText = "Looks like you haven't save any properties yet..."
+    emptyMessageText = "Looks like you haven't save any properties yet...";
   }
 
   const emptyMessage = (
-    <EmptyMessage>{emptyMessageText}</EmptyMessage>
-  )
+    <EmptyMessage data-testid="empty-message">{emptyMessageText}</EmptyMessage>
+  );
 
-  const propertiesMap = (properties
-    .map(property => (
-      <PropertyCard key={property.id} property={property} type={type} buttonClick={buttonClick} />
-    )))
+  const propertiesMap = properties.map(property => (
+    <PropertyCard
+      key={property.id}
+      property={property}
+      type={type}
+      buttonClick={buttonClick}
+    />
+  ));
 
   return (
     <Column>
-      <h2>{heading}</h2>
+      <h2 data-testid="column-heading">{heading}</h2>
       {properties.length === 0 ? emptyMessage : propertiesMap}
     </Column>
   );
@@ -31,8 +35,9 @@ const PropertiesColumn = ({ properties, heading, type, buttonClick }) => {
 PropertiesColumn.propTypes = {
   properties: PropTypes.array.isRequired,
   heading: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
   buttonClick: PropTypes.func
-}
+};
 
 export default PropertiesColumn;
 
@@ -48,4 +53,4 @@ const Column = styled.div`
 const EmptyMessage = styled.span`
   margin-top: 50px;
   font-size: 1.65rem;
-`
+`;

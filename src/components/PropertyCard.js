@@ -1,23 +1,21 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types";
 
 class PropertyCard extends Component {
   state = {
     hovered: false
-  }
-
+  };
 
   onHover = () => {
-    const { hovered } = this.state
+    const { hovered } = this.state;
     this.setState({
       hovered: hovered ? false : true
-    })
-
-  }
+    });
+  };
 
   render() {
-    const { property, type, buttonClick } = this.props
+    const { property, type, buttonClick } = this.props;
     const agency = property.agency;
     const backgroundColor = agency.brandingColors.primary;
     const logoImage = agency.logo;
@@ -25,14 +23,21 @@ class PropertyCard extends Component {
     const propertyImage = property.mainImage;
 
     let overlayButton;
-    if (type === 'results') {
-      overlayButton = <SaveButton onClick={() => buttonClick(property.id)}>Add Property</SaveButton>
-    } else if (type === 'saved') {
-      overlayButton = <RemoveButton onClick={() => buttonClick(property.id)}>Remove Property</RemoveButton>
+    if (type === "results") {
+      overlayButton = (
+        <SaveButton onClick={() => buttonClick(property.id)}>
+          Add Property
+        </SaveButton>
+      );
+    } else if (type === "saved") {
+      overlayButton = (
+        <RemoveButton onClick={() => buttonClick(property.id)}>
+          Remove Property
+        </RemoveButton>
+      );
     } else {
-      return null
+      return null;
     }
-
 
     return (
       <CardWrapper>
@@ -40,22 +45,20 @@ class PropertyCard extends Component {
           <Logo src={logoImage} />
         </CardHeader>
         <ImageWrapper>
-          <Overlay>
-            {overlayButton}
-          </Overlay>
+          <Overlay>{overlayButton}</Overlay>
           <MainImage data-testid="property-image" src={propertyImage} />
         </ImageWrapper>
         <Price data-testid="property-price">{price}</Price>
       </CardWrapper>
     );
   }
-};
+}
 
 PropertyCard.propTypes = {
   property: PropTypes.object.isRequired,
   type: PropTypes.string.isRequired,
   buttonClick: PropTypes.func
-}
+};
 
 export default PropertyCard;
 
@@ -106,7 +109,6 @@ const Price = styled.div`
   font-size: 1.5rem;
 `;
 
-
 const Overlay = styled.div`
   display: flex;
   justify-content: center;
@@ -119,15 +121,15 @@ const Overlay = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  right: 0; 
-  bottom:0;
+  right: 0;
+  bottom: 0;
   z-index: 2;
   transition: all 0.2s ease-out;
   &:hover {
     top: 0;
     opacity: 1;
   }
-  `;
+`;
 
 const Button = styled.button`
   padding: 10px 15px;
@@ -139,15 +141,15 @@ const Button = styled.button`
     outline: none;
   }
   &:hover {
-    cursor: pointer; 
+    cursor: pointer;
   }
 `;
 
 const SaveButton = styled(Button)`
-  background: #6CA468;
+  background: #6ca468;
   color: rgb(255, 255, 255);
   &:hover {
-    background: #4F784C;
+    background: #4f784c;
   }
 `;
 
@@ -157,4 +159,4 @@ const RemoveButton = styled(Button)`
   &:hover {
     background: #a30000;
   }
-`
+`;

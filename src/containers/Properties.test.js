@@ -1,19 +1,14 @@
-// import React from "react";
-// import {
-//   render,
-//   cleanup
-// } from "react-testing-library";
-// import Results from "./Properties";
+import React from "react";
+import { render, cleanup } from "react-testing-library";
+import Properties from "./Properties";
 
-// afterEach(() => {
-//   cleanup();
-// });
+describe("<Properties />", () => {
+  const { debug, getByTestId } = render(<Properties />);
 
-// test("<Results />", () => {
-//   const {
-//     debug,
-//     getTestById
-//   } = render( < Results / > )
+  debug();
 
-//   debug()
-// })
+  test("Renders results and saved columns", () => {
+    expect(getByTestId("results-col"));
+    expect(getByTestId("saved-col"));
+  });
+});
