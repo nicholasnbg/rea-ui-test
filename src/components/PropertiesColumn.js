@@ -1,6 +1,6 @@
-import React, { Fragment } from "react";
+import React from "react";
 import styled from "styled-components";
-import PropertyCard from "../components/PropertyCard";
+import PropertyCard from "./propertyCard/PropertyCard";
 import PropTypes from "prop-types";
 
 const PropertiesColumn = ({ properties, heading, type, buttonClick }) => {
