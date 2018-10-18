@@ -31,7 +31,7 @@ class PropertyCard extends Component {
     setTimeout(() => { this.props.buttonClick(id) }, 300)
   }
 
-  returnButton = (type, id) => {
+  buttonBuilder = (type, id) => {
     let button;
     if (type === "results") {
       button =
@@ -55,7 +55,7 @@ class PropertyCard extends Component {
     const backgroundColor = property.agency.brandingColors.primary;
     const { price, mainImage: propertyImage } = property;
 
-    const overlayButton = this.returnButton(type, property.id)
+    const overlayButton = this.buttonBuilder(type, property.id)
 
     return (
       <CardWrapper visible={this.state.visible} >
