@@ -2,6 +2,8 @@ import React from "react";
 import { render, cleanup } from "react-testing-library";
 import PropertiesColumn from "./PropertiesColumn";
 
+afterEach(cleanup);
+
 describe("<PropertiesColumn />", () => {
   const props = {
     properties: [],
@@ -28,8 +30,6 @@ describe("<PropertiesColumn />", () => {
       type={"saved"}
     />
   );
-
-  afterEach(cleanup);
 
   test("Renders headings", () => {
     expect(getByTestId("column-heading").textContent).toBe(props.heading);

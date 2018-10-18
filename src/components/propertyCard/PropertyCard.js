@@ -7,7 +7,6 @@ import { SaveButton, RemoveButton } from "./CardOverlay";
 
 class PropertyCard extends Component {
   state = {
-    hovered: false,
     visible: true
   };
 
