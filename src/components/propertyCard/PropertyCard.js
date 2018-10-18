@@ -11,13 +11,6 @@ class PropertyCard extends Component {
     visible: true
   };
 
-  onHover = () => {
-    const { hovered } = this.state;
-    this.setState({
-      hovered: hovered ? false : true
-    });
-  };
-
   onSaveClick = id => {
     setTimeout(() => {
       this.props.buttonClick(id);
