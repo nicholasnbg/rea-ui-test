@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from "styled-components";
+import { Button } from './Button'
 
 
 const CardOverlay = ({ button }) => {
@@ -17,7 +18,6 @@ const Overlay = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  padding: 5%;
   background: rgba(0, 0, 0, 0.4);
   opacity: 0;
   height: 100%;
@@ -31,5 +31,31 @@ const Overlay = styled.div`
   transition: all 0.2s ease-out;
   &:hover {
     opacity: 1;
+  }
+`;
+
+
+/***********OVERLAY SPECIFIC BUTTONS *********/
+export const SaveButton = styled(Button)`
+  bottom: 0px;
+  background: #6ca468;
+  color: rgb(255, 255, 255);
+  &:hover {
+    background: #4f784c;
+  }
+  ${Overlay}:hover & {
+    transform: translateY(-25px)
+  }
+`;
+
+export const RemoveButton = styled(Button)`
+  bottom: 0px;
+  background: #e4002b;
+  color: rgb(255, 255, 255);
+  &:hover {
+    background: #a30000;
+  }
+  ${Overlay}:hover & {
+    transform: translateY(-25px)
   }
 `;

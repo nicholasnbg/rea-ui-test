@@ -3,7 +3,7 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import CardHeader from './CardHeader'
 import CardImage from './CardImage'
-import { SaveButton, RemoveButton } from './Buttons'
+import { SaveButton, RemoveButton } from './CardOverlay'
 
 
 class PropertyCard extends Component {
