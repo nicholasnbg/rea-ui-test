@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import CardHeader from './CardHeader'
-import CardImage from './CardImage'
-import { SaveButton, RemoveButton } from './CardOverlay'
-
+import CardHeader from "./CardHeader";
+import CardImage from "./CardImage";
+import { SaveButton, RemoveButton } from "./CardOverlay";
 
 class PropertyCard extends Component {
   state = {
@@ -12,7 +11,6 @@ class PropertyCard extends Component {
     visible: true
   };
 
-  /*************** METHODS ****************/
   onHover = () => {
     const { hovered } = this.state;
     this.setState({
@@ -20,45 +18,55 @@ class PropertyCard extends Component {
     });
   };
 
-  onSaveClick = (id) => {
-    setTimeout(() => { this.props.buttonClick(id) }, 100)
-  }
+  onSaveClick = id => {
+    setTimeout(() => {
+      this.props.buttonClick(id);
+    }, 100);
+  };
 
-  onRemoveClick = (id) => {
+  onRemoveClick = id => {
     this.setState({
       visible: false
-    })
-    setTimeout(() => { this.props.buttonClick(id) }, 300)
-  }
+    });
+    setTimeout(() => {
+      this.props.buttonClick(id);
+    }, 300);
+  };
 
   buttonBuilder = (type, id) => {
     let button;
     if (type === "results") {
-      button =
-        <SaveButton onClick={() => this.onSaveClick(id)}>
+      button = (
+        <SaveButton
+          className={"pc-button"}
+          onClick={() => this.onSaveClick(id)}
+        >
           Add Property
         </SaveButton>
-
+      );
     } else if (type === "saved") {
-      button =
-        <RemoveButton onClick={() => this.onRemoveClick(id)}>
+      button = (
+        <RemoveButton
+          className={"pc-button"}
+          onClick={() => this.onRemoveClick(id)}
+        >
           Remove Property
         </RemoveButton>
+      );
     }
-    return button
-  }
+    return button;
+  };
 
-  /*************** RENDER ****************/
   render() {
     const { property, type } = this.props;
     const { logo: logoImage } = property.agency;
     const backgroundColor = property.agency.brandingColors.primary;
     const { price, mainImage: propertyImage } = property;
 
-    const overlayButton = this.buttonBuilder(type, property.id)
+    const overlayButton = this.buttonBuilder(type, property.id);
 
     return (
-      <CardWrapper visible={this.state.visible} >
+      <CardWrapper className={"property-card"} visible={this.state.visible}>
         <CardHeader backgroundColor={backgroundColor} logoImage={logoImage} />
         <CardImage button={overlayButton} propertyImage={propertyImage} />
         <Price data-testid="property-price">{price}</Price>
@@ -75,8 +83,6 @@ PropertyCard.propTypes = {
 
 export default PropertyCard;
 
-/********************** Styled Componenets ***********************/
-
 const CardWrapper = styled.div`
   display: grid;
   grid-template-rows: 45px 370px 90px;
@@ -87,7 +93,7 @@ const CardWrapper = styled.div`
   box-shadow: 0 0.125em 0.25em rgba(0, 0, 0, 0.2);
   margin: 20px 0;
   transition: all 0.3s ease-in;
-  opacity: ${props => props.visible ? 1 : 0}
+  opacity: ${props => (props.visible ? 1 : 0)};
 `;
 
 const Price = styled.div`
@@ -98,4 +104,3 @@ const Price = styled.div`
   justify-content: center;
   font-size: 1.5rem;
 `;
-

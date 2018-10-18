@@ -1,5 +1,5 @@
 import React from "react";
-import { render, cleanup, fireEvent } from "react-testing-library";
+import { render, cleanup, fireEvent, wait } from "react-testing-library";
 import PropertyCard from "./PropertyCard";
 
 const property = {
@@ -15,18 +15,17 @@ const property = {
     "http://i4.au.reastatic.net/640x480/98cee1b2a3a64329921fc38f7e2926a78d41fcc683fc48fb8a8ef2999b14c027/main.jpg"
 };
 
-const saveProperty = jest.fn();
+const clickFunction = jest.fn();
 
 describe("<PropertyCard />", () => {
-  const { debug, getByTestId, getByText } = render(
+  const { getByTestId, getByText, container } = render(
     <PropertyCard
       property={property}
       type={"saved"}
-      buttonClick={saveProperty}
+      buttonClick={clickFunction}
     />
   );
 
-  // debug();
   test("that things render", () => {
     expect(getByTestId("property-price").textContent).toBe(property.price);
     expect(getByTestId("property-image").getAttribute("src")).toBe(
@@ -35,9 +34,11 @@ describe("<PropertyCard />", () => {
     expect(getByText("Remove Property"));
   });
 
-  test("that onClick functions are called", () => {
-    fireEvent.click(getByText("Remove Property"));
+  test("that onClick functions are called", async () => {
+    fireEvent.click(container.querySelector(".pc-button"));
 
-    expect(saveProperty).toHaveBeenCalled();
+    await wait(() => {
+      expect(clickFunction).toHaveBeenCalled();
+    });
   });
 });

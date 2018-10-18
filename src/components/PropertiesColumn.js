@@ -12,7 +12,7 @@ const PropertiesColumn = ({ properties, heading, type, buttonClick }) => {
   }
 
   const emptyMessage = (
-    <EmptyMessage data-testid="empty-message">{emptyMessageText}</EmptyMessage>
+    <EmptyMessage className="empty-message">{emptyMessageText}</EmptyMessage>
   );
 
   const propertiesMap = properties.map(property => (
@@ -25,7 +25,7 @@ const PropertiesColumn = ({ properties, heading, type, buttonClick }) => {
   ));
 
   return (
-    <Column>
+    <Column className={"column"}>
       <h2 data-testid="column-heading">{heading}</h2>
       {properties.length === 0 ? emptyMessage : propertiesMap}
     </Column>

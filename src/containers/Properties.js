@@ -37,14 +37,12 @@ class Properties extends Component {
     return (
       <PropertiesWrapper>
         <PropertiesColumn
-          data-testid="results-col"
           properties={this.state.results}
           heading={"Results"}
           type={"results"}
           buttonClick={this.saveProperty}
         />
         <PropertiesColumn
-          data-testid="saved-col"
           properties={this.state.saved}
           heading={"Saved"}
           type={"saved"}

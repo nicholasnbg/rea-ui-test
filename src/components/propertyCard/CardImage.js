@@ -1,17 +1,17 @@
-import React from 'react'
-import styled from 'styled-components'
-import CardOverlay from './CardOverlay'
+import React from "react";
+import styled from "styled-components";
+import CardOverlay from "./CardOverlay";
 
 const CardImage = ({ button, propertyImage }) => {
   return (
     <ImageWrapper>
       <CardOverlay button={button} />
-      <MainImage src={propertyImage} />
+      <MainImage data-testid={"property-image"} src={propertyImage} />
     </ImageWrapper>
-  )
-}
+  );
+};
 
-export default CardImage
+export default CardImage;
 
 const ImageWrapper = styled.div`
   height: auto;
