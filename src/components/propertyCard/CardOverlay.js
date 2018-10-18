@@ -17,7 +17,7 @@ const Overlay = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  padding: 10%;
+  padding: 5%;
   background: rgba(0, 0, 0, 0.4);
   opacity: 0;
   height: 100%;
