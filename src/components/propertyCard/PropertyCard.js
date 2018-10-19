@@ -8,15 +8,15 @@ import { buttonBuilder } from "../buttonBuilder";
 class PropertyCard extends Component {
   state = {
     visible: true,
-    timeouts: {
+    cardTimeouts: {
       results: 100,
       saved: 300
     }
   };
 
-  onClick = id => {
+  onCardButtonClick = id => {
     const { type } = this.props;
-    const timeout = this.state.timeouts[type];
+    const timeout = this.state.cardTimeouts[type];
     if (type === "saved") {
       this.setState({
         visible: false
@@ -36,8 +36,11 @@ class PropertyCard extends Component {
     const { logo: logoImage } = property.agency;
     const backgroundColor = property.agency.brandingColors.primary;
     const { price, mainImage: propertyImage } = property;
-
-    const overlayButton = buttonBuilder(type, property.id, this.onClick);
+    const overlayButton = buttonBuilder(
+      type,
+      property.id,
+      this.onCardButtonClick
+    );
 
     return (
       <CardWrapper className={"property-card"} visible={this.state.visible}>
