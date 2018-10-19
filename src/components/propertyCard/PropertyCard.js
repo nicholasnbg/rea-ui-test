@@ -3,50 +3,32 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import CardHeader from "./CardHeader";
 import CardImage from "./CardImage";
-import { SaveButton, RemoveButton } from "./CardOverlay";
+import { buttonBuilder } from "../buttonBuilder";
 
 class PropertyCard extends Component {
   state = {
-    visible: true
-  };
-
-  onSaveClick = id => {
-    setTimeout(() => {
-      this.props.buttonClick(id);
-    }, 100);
-  };
-
-  onRemoveClick = id => {
-    this.setState({
-      visible: false
-    });
-    setTimeout(() => {
-      this.props.buttonClick(id);
-    }, 300);
-  };
-
-  buttonBuilder = (type, id) => {
-    let button;
-    if (type === "results") {
-      button = (
-        <SaveButton
-          className={"pc-button"}
-          onClick={() => this.onSaveClick(id)}
-        >
-          Add Property
-        </SaveButton>
-      );
-    } else if (type === "saved") {
-      button = (
-        <RemoveButton
-          className={"pc-button"}
-          onClick={() => this.onRemoveClick(id)}
-        >
-          Remove Property
-        </RemoveButton>
-      );
+    visible: true,
+    timeouts: {
+      results: 100,
+      saved: 300
     }
-    return button;
+  };
+
+  onClick = id => {
+    const { type } = this.props;
+    const timeout = this.state.timeouts[type];
+    if (type === "saved") {
+      this.setState({
+        visible: false
+      });
+      setTimeout(() => {
+        this.props.buttonClick(id);
+      }, timeout);
+    } else {
+      setTimeout(() => {
+        this.props.buttonClick(id);
+      }, timeout);
+    }
   };
 
   render() {
@@ -55,7 +37,7 @@ class PropertyCard extends Component {
     const backgroundColor = property.agency.brandingColors.primary;
     const { price, mainImage: propertyImage } = property;
 
-    const overlayButton = this.buttonBuilder(type, property.id);
+    const overlayButton = buttonBuilder(type, property.id, this.onClick);
 
     return (
       <CardWrapper className={"property-card"} visible={this.state.visible}>
