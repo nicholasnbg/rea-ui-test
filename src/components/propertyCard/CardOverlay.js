@@ -1,18 +1,12 @@
-import React from 'react'
+import React from "react";
 import styled from "styled-components";
-import { Button } from './Button'
-
+import { Button } from "./Button";
 
 const CardOverlay = ({ button }) => {
-  return (
-    <Overlay>
-      {button}
-    </Overlay>
-  )
-}
+  return <Overlay>{button}</Overlay>;
+};
 
-export default CardOverlay
-
+export default CardOverlay;
 
 const Overlay = styled.div`
   display: flex;
@@ -34,8 +28,6 @@ const Overlay = styled.div`
   }
 `;
 
-
-/***********OVERLAY SPECIFIC BUTTONS *********/
 export const SaveButton = styled(Button)`
   bottom: 0px;
   background: #6ca468;
@@ -44,7 +36,7 @@ export const SaveButton = styled(Button)`
     background: #4f784c;
   }
   ${Overlay}:hover & {
-    transform: translateY(-25px)
+    transform: translateY(-25px);
   }
 `;
 
@@ -56,6 +48,6 @@ export const RemoveButton = styled(Button)`
     background: #a30000;
   }
   ${Overlay}:hover & {
-    transform: translateY(-25px)
+    transform: translateY(-25px);
   }
 `;

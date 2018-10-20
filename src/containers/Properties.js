@@ -18,7 +18,7 @@ class Properties extends Component {
     const newSaved = isDuplicate ? saved : [...saved, property];
 
     this.setState({
-      results: results,
+      results,
       saved: newSaved
     });
   };
@@ -29,7 +29,7 @@ class Properties extends Component {
     saved.splice(removeIndex, 1);
 
     this.setState({
-      saved: saved
+      saved
     });
   };
 

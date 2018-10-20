@@ -3,7 +3,7 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import CardHeader from "./CardHeader";
 import CardImage from "./CardImage";
-import { buttonBuilder } from "../buttonBuilder";
+import { buttonBuilder } from "../../utilities/buttonBuilder";
 
 class PropertyCard extends Component {
   state = {
@@ -33,9 +33,9 @@ class PropertyCard extends Component {
 
   render() {
     const { property, type } = this.props;
-    const { logo: logoImage } = property.agency;
+    const { logo } = property.agency;
     const backgroundColor = property.agency.brandingColors.primary;
-    const { price, mainImage: propertyImage } = property;
+    const { price, mainImage } = property;
     const overlayButton = buttonBuilder(
       type,
       property.id,
@@ -44,8 +44,8 @@ class PropertyCard extends Component {
 
     return (
       <CardWrapper className={"property-card"} visible={this.state.visible}>
-        <CardHeader backgroundColor={backgroundColor} logoImage={logoImage} />
-        <CardImage button={overlayButton} propertyImage={propertyImage} />
+        <CardHeader backgroundColor={backgroundColor} logoImage={logo} />
+        <CardImage button={overlayButton} propertyImage={mainImage} />
         <Price data-testid="property-price">{price}</Price>
       </CardWrapper>
     );

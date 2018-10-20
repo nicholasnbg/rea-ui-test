@@ -2,18 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import PropertyCard from "./propertyCard/PropertyCard";
 import PropTypes from "prop-types";
+import { emptyMessageBuilder } from "../utilities/emptyMessage";
 
 const PropertiesColumn = ({ properties, heading, type, buttonClick }) => {
-  let emptyMessageText;
-  if (type === "results") {
-    emptyMessageText = "Sorry, no results found...";
-  } else if (type === "saved") {
-    emptyMessageText = "Looks like you haven't save any properties yet...";
-  }
-
-  const emptyMessage = (
-    <EmptyMessage className="empty-message">{emptyMessageText}</EmptyMessage>
-  );
+  const emptyMessage = emptyMessageBuilder(type);
 
   const propertiesMap = properties.map(property => (
     <PropertyCard
@@ -48,9 +40,4 @@ const Column = styled.div`
   height: auto;
   text-align: center;
   margin-top: 20px;
-`;
-
-const EmptyMessage = styled.span`
-  margin-top: 50px;
-  font-size: 1.65rem;
 `;
