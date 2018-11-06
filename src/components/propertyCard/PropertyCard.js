@@ -3,7 +3,7 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import CardHeader from "./CardHeader";
 import CardImage from "./CardImage";
-import { buttonBuilder } from "../../utilities/buttonBuilder";
+import { OverlayButton } from "./CardOverlay";
 
 class PropertyCard extends Component {
   state = {
@@ -36,10 +36,15 @@ class PropertyCard extends Component {
     const { logo } = property.agency;
     const backgroundColor = property.agency.brandingColors.primary;
     const { price, mainImage } = property;
-    const overlayButton = buttonBuilder(
-      type,
-      property.id,
-      this.onCardButtonClick
+
+    const overlayButton = (
+      <OverlayButton
+        onClick={() => this.onCardButtonClick(property.id)}
+        green={type === "results"}
+        danger={type === "saved"}
+      >
+        {type === "saved" ? "Remove Property" : "Add Property"}
+      </OverlayButton>
     );
 
     return (

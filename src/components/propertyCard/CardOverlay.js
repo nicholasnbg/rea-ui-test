@@ -28,25 +28,7 @@ const Overlay = styled.div`
   }
 `;
 
-export const SaveButton = styled(Button)`
-  bottom: 0px;
-  background: #6ca468;
-  color: rgb(255, 255, 255);
-  &:hover {
-    background: #4f784c;
-  }
-  ${Overlay}:hover & {
-    transform: translateY(-25px);
-  }
-`;
-
-export const RemoveButton = styled(Button)`
-  bottom: 0px;
-  background: #e4002b;
-  color: rgb(255, 255, 255);
-  &:hover {
-    background: #a30000;
-  }
+export const OverlayButton = styled(Button)`
   ${Overlay}:hover & {
     transform: translateY(-25px);
   }
